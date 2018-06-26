@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+	<link href="//fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<!-- //online-fonts -->
+		<script src="js/jquery.min.js"></script>
+	  <script src="js/bootstrap.min.js"></script>
+<script src="js/angular.min.js"></script>	
+
+	<script type="text/javascript">
+if(localStorage.getItem("Code") == null){
+	window.location.href = "login.html";
+}
+</script>
+<style type="text/css">
+	body{
+		 background:url(../images/1.jpg);
+	}
+</style>
+
+</head>
+<body>
+		<div id="loading" class="loader">	
+	</div>
+<div ng-app="myApp" ng-controller="UserDetails">
+	<div class="btn-group btn-group-justified">
+			<a href="Home.html" class="btn btn-primary active"><i class="fa-home fa fa-3x"></i></a>
+		<a href="TrackComplain.html" class="btn btn-primary "><i class="fa-list fa fa-3x"></i></a>
+		<a href="#" class="btn btn-primary "><i class="fa-road fa fa-3x"></i></a>
+		<a href="" class="btn btn-primary"  ng-click="LogOut()"><i class="fa-power-off fa fa-3x"></i></a>
+		<a href="ChangePassword.html" class="btn btn-primary"><i class="fa-cog fa fa-3x"></i></a>
+
+	</div>
+
+	<div class=" text-center">
+		<div style="margin: 5px;">
+			
+				<div class="bs-component">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Take Picture for this Complain</h3>
+							<br>
+							<p>{{ today | date : "fullDate"}}</p>
+						</div>
+						<div  style="background:url(../images/1.jpg);">
+						
+							<h4 class="btn btn-primary btn-block" ng-repeat="a in alert">{{a.Msg}}</h4>
+							<h4 class="btn btn-primary btn-block" id="titlecno"></h4>
+							<div style="overflow: scroll;">
+						
+						<style type="text/css">
+							body {
+font-family: Arial;
+font-size: 14px;
+}
+.bgColor {
+max-width: 440px;
+height:150px;
+background-color: #fff4be;
+border-radius: 4px;
+}
+.bgColor label{
+font-weight: bold;
+color: #A0A0A0;
+}
+#targetLayer{
+float:left;
+width:150px;
+height:150px;
+text-align:center;
+line-height:150px;
+font-weight: bold;
+color: #C0C0C0;
+background-color: #F0E8E0;
+border-bottom-left-radius: 4px;
+border-top-left-radius: 4px;
+}
+#uploadFormLayer{
+	float:left;
+	padding: 20px;
+}
+.btnSubmit {
+	background-color: #696969;
+    padding: 5px 30px;
+    border: #696969 1px solid;
+    border-radius: 4px;
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+.inputFile {
+	padding: 5px;
+	background-color: #FFFFFF;
+	border:#F0E8E0 1px solid;
+	border-radius: 4px;
+}
+.image-preview {	
+width:150px;
+height:150px;
+border-bottom-left-radius: 4px;
+border-top-left-radius: 4px;
+}
+
+						</style>
+
+<script type="text/javascript">
+$(document).ready(function (e) {
+	$("#uploadForm").on('submit',(function(e) {
+		e.preventDefault();
+		$.ajax({
+        	url: localStorage.getItem("serverpath")+"upload.php",
+			type: "POST",
+			data:  new FormData(this),
+			contentType: false,
+    	    cache: false,
+			processData:false,
+			success: function(data)
+		    {
+			$("#targetLayer").html(data);
+		    },
+		  	error: function() 
+	    	{
+	    	} 	        
+	   });
+	}));
+});
+</script>
+
+						<div class="bgColor">
+<form id="uploadForm" action="upload.php" method="post">
+<div id="targetLayer">No Image</div>
+<div id="uploadFormLayer">
+<input name="userImage" type="file" class="form-control" /><br/>
+<input type="submit" value="Submit" class="btn btn-primary" />
+</form>
+</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+			
+		</div>
+	</div>
+<script>
+		var app = angular.module('myApp', []);
+		app.controller('UserDetails', function($scope, $http) {
+		 $scope.today = new Date();
+		document.getElementById("titlecno").innerHTML = "Complain No : "+sessionStorage.getItem("ComplainNo");
+
+			 $scope.LogOut = function () {
+				 localStorage.removeItem("Code");
+				 window.location.href= "login.html";
+   			 };
+
+   		
+		});
+	</script>
+
+<script type="text/javascript" src="js/sc_index.js"></script>
+
+</div>
+
+
+</body>
+</html>
